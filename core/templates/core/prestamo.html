@@ -1,0 +1,377 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+     <link  rel="stylesheet" href="{% static '/assets/css/header.css' %}"/>
+     <link rel="stylesheet" href="{% static '/assets/css/usuario.css' %}" media="screen" title="no title" charset="utf-8">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+     <link href="https://cdn.jsdelivr.net/npm/vuesax/dist/vuesax.css" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <style>
+      body.suit_layout_horizontal, body.login {
+          background-color: whitesmoke;
+      }
+      #content {
+        background-color: whitesmoke;
+      }
+      body.suit_layout_horizontal .breadcrumbs {
+      background-color: whitesmoke;
+    }
+
+      .loader-box{
+        display: block;
+        margin-top: 0px;
+      }
+      .loader{
+        border-bottom-width: 8px;
+        border-top-width: 8px;
+      }
+      .img-loader{
+         height: 80px;
+      }
+      .inputidestu{
+        height: 33px;
+        margin-top: 30px;
+        margin-bottom: 26px;
+      }
+      .fa {
+        color: #ff0000!important;
+      }
+      .botonadd{
+        background-color: #035a7b;
+        border-color: #035a7b;
+      }
+
+      .vs-card--content {
+        position: relative
+      }
+
+      .vs-table--pagination {
+        position: absolute;
+        bottom: -4.5rem;
+      }
+
+      .vs-pagination--buttons i {
+            display: none;
+      }
+
+      .vs-pagination--ul {
+        background: transparent;
+      }
+
+      .vs-table--pagination .item-pagination {
+        background: #ccc;
+      }
+
+      .vs-table--search-input {
+        padding: 7px 55px;
+        width: 100vw;
+      }
+
+      .vs-table--header {
+        padding: .4rem 1rem;
+      }
+
+      .vs-table--pagination .vs-pagination--buttons {
+            display: none;
+      }
+      .vs-card--header {
+        background-color: #225f51;
+        color: white;
+        border-radius: 5px;
+      }
+      .vs-table--search-input, .vs-table--search i  {
+        color: chartreuse;
+      }
+
+      .vs-table--header{
+        background-color: #225f51;
+       color: #fff;
+       margin-top: 0px;
+       height: 41px;
+       margin-left: 0px;
+       padding-left: 10px;
+       padding-right: 15px;
+       border-radius: 5px;
+      }
+
+      .img-loader{
+          animation-duration: 2s;
+          animation-name: slidein;
+          animation-iteration-count: infinite;
+        }
+
+        @keyframes slidein {
+        from {
+          margin-left: 70%;
+        }
+
+        to {
+          margin-left: 0%;
+        }
+      }
+
+    </style>
+
+    <style lang="stylus">
+    .colors-example
+      .vs-input
+        margin 5px
+        margin-top 20px;
+    </style>
+{%endblock%}
+
+{% block content %}
+<div id="app" style="display: flex;justify-content: center;">
+   <div v-show="inputform" class="centerx icons-example">
+     <div class="con-example-images" style="display: flex;justify-content: center;">
+     <img class="img-loader" src="{% static '/assets/images/id.png' %}" width="100" height="70">
+  </div>
+    <vs-input v-on:keyup.enter="change()" placeholder="Buscar Persona" :warning=false warning-text="Por FavorIngrese Un Numero De Tarjeta Valido" v-model="value" />
+  </div>
+
+  <div class="centerx" style="width: 100%" v-show="inputform2">
+    <vs-row vs-justify="flex-start">
+        <vs-col type="flex" vs-justify="flex-end" vs-align="flex-end" vs-w="7" style="margin: 0 1rem ">
+          <vs-card class="cardx">
+            <vs-table multiple v-model="selected" pagination max-items="7" search :data="libros">
+              <template slot="header">
+            <h5>Libros Activos</h5>
+            </template>
+            <template slot="thead">
+            <vs-th style="width:15%"  sort-key="id">
+            ID
+            </vs-th>
+            <vs-th style="width:25%"  sort-key="nombre_libro">
+            Nombre
+            </vs-th>
+            <vs-th style="width:25%"  >
+            Autor
+            </vs-th>
+            <vs-th  style="width:25%" >
+            Estado
+            </vs-th>
+            </template>
+
+            <template slot-scope="{data}">
+            <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" >
+            <vs-td style="width:30%" :data="data[indextr].id" >
+            ${data[indextr].id}
+            </vs-td>
+            <vs-td style="width:25%" :data="data[indextr].nombre_libro">
+            ${data[indextr].nombre_libro}
+            </vs-td>
+            <vs-td style="width:25%" :data="data[indextr].Autor">
+            ${data[indextr].Autor}
+            </vs-td>
+            <vs-td style="width:25%"  :data="data[indextr].Estado_libro">
+            ${data[indextr].Estado_libro}
+            </vs-td>
+            </vs-tr>
+            </template>
+            </vs-table>
+            <vs-list-item class="" title="Items Seleccionados" color="danger"> ${selected.length}
+            </vs-list-item>
+          </vs-card>
+        </vs-col>
+        <vs-col type="flex" vs-justify="center" vs-align="center" vs-w="4">
+          <vs-card class="cardx">
+            <div slot="header" style="display: flex;justify-content: center;">
+              <h3>  Informacion de usuario
+              </h3>
+            </div>
+            <div slot="media">
+
+            </div>
+            <div>
+              <vs-list>
+                <vs-list-header title="Informacion Personal" color="success"></vs-list-header>
+                <vs-list-item title="Nombre Completo">${persona.nombre}
+                </vs-list-item>
+                <vs-list-item title="Nro Tarjeta">${persona.tarjeta}
+                </vs-list-item>
+                <vs-list-item title="Nro Documento">${persona.documento}
+                </vs-list-item>
+                <vs-list-header title="Informacion Academica" color="primary"></vs-list-header>
+                <vs-list-item title="Programa o Dependencia">${persona.dependencia}
+                </vs-list-item>
+                <vs-list-item title="Cargo"> ${persona.cargo}
+                </vs-list-item>
+                <vs-list-header title="Informacion Prestamos" color="danger"></vs-list-header>
+                <vs-list-item title="Incidentes"> NO
+                </vs-list-item>
+                <vs-list-item title="Cantidad Incidentes"> 0
+                </vs-list-item>
+                <div style="margin-top: .8rem">
+                  <vs-button v-on:click="cancel()" type="relief">Cancelar</vs-button>
+                  <vs-button v-on:click="saveloan()"  color="success" type="relief">Guardar</vs-button>
+                  </div>
+            </vs-list>
+            </div>
+          </vs-card>
+        </vs-col>
+      </vs-row>
+</div>
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuesax/dist/vuesax.umd.js"></script>
+<script type="text/javascript">
+  var app = new Vue({
+    el: '#app',
+    delimiters: ['${','}'],
+    data: {
+      token:"{{ csrf_token }}",
+      usuario:"{{user.id}}",
+      value:'',
+      inputform:true,
+      inputform2:false,
+      persona:{
+        id:"",
+        nombre:"",
+        tarjeta:"",
+        documento:"",
+        dependencia:"",
+        cargo:"",
+        incidentes:"",
+        cantIncidente:0,
+      },
+      selected:[],
+      libros:[],
+      detalleprestamo:[],
+      cantidad:300
+    },
+    methods: {
+      cancel(){
+        obj = this
+        obj.value = ''
+        obj.inputform = true
+        obj.inputform2 = false
+        console.clear()
+      },
+      regextarjeta(e){
+        var expReg = /^([0-9])*$/
+        if(expReg.test(e)){
+          return true
+        } else {
+          this.$vs.notify({title:'Atencion Numero De Tarjeta No Valido',text:'Este no es un numero de tarjeta valido',color:'warning'})
+          return false
+        }
+      },
+      loadresources(){
+        obj = this
+        axios.get('/api/libro/active/' ).then(function (response) {
+           var data =  response.data
+           var resources = []
+           for (key in data){
+              obj.libros.push({
+                id:data[key].id,
+                nombre_libro:data[key].nombre_libro,
+                Autor:data[key].Autor,
+                Estado_libro:data[key].Estado_libro
+              })
+           }
+        }).catch(function (error) {
+          console.log(error)
+          obj.$vs.notify({title:'Error',text:'Ha ocurrido un erro cargando los recursos',color:'danger'})
+        })
+      },
+      change(){
+        obj = this
+        if(this.regextarjeta(this.value)){
+          var tarjeta = Number(this.value)
+          axios.get('/api/Prestamo/?Estado=EN+CURSO&Persona__Nro_Tarjeta=' + tarjeta )
+          .then(function (response) {
+              prestamos =response.data
+              if(prestamos.length == 0){
+                axios.get('/api/Persona/?Nro_Tarjeta='+tarjeta)
+                  .then(function (response) {
+                        var user = response.data;
+                        if(user[0].Estado_Tarjeta == "ACTIVA"){
+                          obj.inputform = false
+                          obj.inputform2 = true
+                          obj.loadresources()
+                          obj.persona.id = user[0].id
+                          obj.persona.nombre = user[0].Nombres + " " +user[0].Apellidos
+                          obj.persona.tarjeta = user[0].Nro_Tarjeta
+                          obj.persona.documento = user[0].Nro_Documento
+                          obj.persona.dependencia = user[0].Dependencia.nombre.toUpperCase()
+                          obj.persona.cargo = user[0].Tipo_Persona.Tipo_persona
+                          if(user[0].Incidentes.length == 0){
+                                obj.persona.incidentes = "NO"
+                            }else{
+                              obj.persona.incidentes = "SI"
+                            }
+                            obj.persona.cantIncidente = user[0].Incidentes.length
+                        }else{
+                          obj.$vs.notify({title:'Atencion Tarjeta Inactiva',text:'Esta tarjeta se encuentra en estado inactivo..!',color:'danger'})
+                        }
+                  }).catch(function (error) {
+                    obj.$vs.notify({title:'Atencion Tarjeta No Registrada',text:'Esta tarjeta no esta registrada en el sistema',color:'danger'})
+                  })
+                  this.value=''
+                  /* console.clear() */
+              }else{
+                window.location.replace("/admin/Prestamo/Detalle/"+prestamos[0].Id_prestamo)
+              }
+          })
+          .catch(function (error) {
+          });
+        }
+      },
+      getDateTime(){
+        var date =  new Date();
+        var fecha  = date.getFullYear() +"-"+ (date.getMonth() + 1) + "-" + date.getDate()
+        var hora = date.getHours() + ":" + date.getMinutes() + ":"+ date.getSeconds();
+        var datetime = {
+          fecha:fecha,
+          hora:hora
+        }
+        return datetime
+      },
+      generarJSON(){
+        obj = this
+        datetime =obj.getDateTime()
+        var libros = obj.selected
+        for (key in libros) {
+          var libro = libros[key].id
+          var detalle = {
+            "Fecha_prestamo": datetime.fecha,
+          	"Estado": "PRESTADO",
+          	"libroid": libro
+          }
+          obj.detalleprestamo.push(detalle)
+        }
+        var datos = {
+            "Fecha_prestamo": datetime.fecha,
+            "Hora_prestamo":datetime.hora,
+            "PrestatarioId": obj.usuario,
+            "personaId" : obj.persona.id,
+            "Estado_prestamo": "EN CURSO",
+            "detalleprestamo": obj.detalleprestamo
+          }
+          return datos;
+        },
+      saveloan(){
+        obj = this
+        if(obj.selected.length!==0){
+          var data = obj.generarJSON()
+          axios.post("/api/Prestamo/", data, {headers: {"X-CSRFToken": obj.token}}).then(function (response) {
+                    window.location.replace("/admin/prestamos/prestamo/")
+          }).catch(function (error) {
+                    // console.log(error)
+          });
+        }else{
+          this.$vs.notify({title:'Atencion',text:'No ha seleccionado ningun recurso para prestar',color:'warning'})
+        }
+
+      }
+    },
+})
+   </script>
+{% endblock %}

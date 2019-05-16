@@ -1,0 +1,203 @@
+{% extends 'admin/base.html' %}
+{% load i18n admin_static suit_tags %}
+
+{% block stylesheet %}{% static "suit/css/suit.css" %}{% endblock %}
+
+{% block extrastyle %}
+    
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static '/assets/images/apple-icon-57x57.png' %}">
+<link rel="apple-touch-icon" sizes="60x60" href="{% static '/assets/images/apple-icon-60x60.png' %}">
+<link rel="apple-touch-icon" sizes="72x72" href="{% static '/assets/images/apple-icon-72x72.png' %}">
+<link rel="apple-touch-icon" sizes="76x76" href="{% static '/assets/images/apple-icon-76x76.png' %}">
+<link rel="apple-touch-icon" sizes="114x114" href="{% static '/assets/images/apple-icon-114x114.png' %}">
+<link rel="apple-touch-icon" sizes="120x120" href="{% static '/assets/images/apple-icon-120x120.png' %}">
+<link rel="apple-touch-icon" sizes="144x144" href="{% static '/assets/images/apple-icon-144x144.png' %}">
+<link rel="apple-touch-icon" sizes="152x152" href="{% static '/assets/images/apple-icon-152x152.png' %}">
+<link rel="apple-touch-icon" sizes="180x180" href="{% static '/assets/images/apple-icon-180x180.png' %}">
+<link rel="icon" type="image/png" sizes="192x192"  href="{% static '/assets/images/android-icon-192x192.png' %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{% static '/assets/images/favicon-32x32.png' %}">
+<link rel="icon" type="image/png" sizes="96x96" href="{% static '/assets/images/favicon-96x96.png' %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static '/assets/images/favicon-16x16.png' %}">
+<link rel="manifest" href="{% static '/assets/images/manifest.json' %}">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="{% static '/assets/images/ms-icon-144x144.png' %}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<meta name="theme-color" content="#ffffff">
+    <link  href="{% static '/assets/css/header.css' %}"
+
+{% endblock %}
+
+{% block bodyclass %}{{ block.super|suit_body_class:request }}{% endblock %}
+
+{% block title %}LENBOOK Admin{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name">
+      <a href="/admin" class="logo"><img style='width:120px' src="{% static 'assets/images/logo.png' %}" alt=""></a>
+        <a href="/">
+                <span style="float: left; color: #90A4AE; 
+                font-weight: 500; line-height: 1.2;" class="header-label">Sede Monteria</span></a>
+    </h1>
+{% endblock %}
+
+{% block pretitle %}
+<div class="content-wrap">
+
+{% endblock %}
+
+{% block sidebar %}
+    </div> <!-- Close content-wrap -->
+{% endblock %}
+
+{% block usertools %}
+    {% if has_permission %}
+
+        <div id="user-tools" class="suit-user-tools">
+
+            {% block welcome-msg %}
+                <span class="welcome" style="color:#ffffff; 
+                font-weight: 500; line-height: 1.2;">
+                  Hola {{user.username}}  /
+            </span>
+
+            {% endblock %}
+            <div class="user-links">
+            {% block userlinks %}
+                {% if site_url %}
+
+
+                {% endif %}
+                {% if user.is_active and user.is_staff %}
+                    {% url 'django-admindocs-docroot' as docsroot %}
+                    {% if docsroot %}
+                        <a href="{{ docsroot }}" class="icon-link documentation-link" data-title="{% trans 'Documentation' %}">{% trans 'Documentation' %}</a>
+                        <span class="separator">/</span>
+                    {% endif %}
+                {% endif %}
+                {% if user.has_usable_password %}
+
+
+                {% endif %}
+                <a href="{% url 'admin:logout' %}"data-title="{% trans 'Log out' %}"><img style='width:10px' src="{% static 'assets/images/salir.svg' %}" alt="">{% trans 'Log out' %}</a>
+            {% endblock %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block nav-global %}
+        <style>
+            body.suit_layout_vertical #suit-nav {
+                background: #0F2027;  /* fallback for old browsers */
+				background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+				background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+            }
+            body.suit_layout_vertical #header .suit-user-tools {
+                background: #0F2027;  /* fallback for old browsers */
+				background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+				background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+            }
+            body.suit_layout_vertical:not(.login) #container #content{
+                background: #fdffff;  
+            }
+            body.suit_layout_vertical #header #branding{
+                background: #0F2027;  /* fallback for old browsers */
+				background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+				background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+            }
+        
+            .footer {
+                background: rgba(105, 107, 107, 0.123);  /* fallback for old browsers */
+            }
+            body.suit_layout_vertical #suit-nav > ul > li:not(.active):hover > ul > li > a:hover{
+                background-color: #706b6b;
+            }
+            body.suit_layout_vertical #suit-nav > ul > li > ul > li a{
+                color: black;
+            }
+            body.suit_layout_vertical #suit-nav > ul > li.active{
+                background: #AED231;  /* fallback for old browsers */
+                background: -webkit-linear-gradient(to right, #AED231, #fff);  /* Chrome 10-25, Safari 5.1-6 */
+                background: linear-gradient(to right, #AED231, #fff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+            }
+
+            .fa {
+            color: #ffffff!important;
+            font: normal 14px;
+            }
+        </style>
+    {% include 'suit/menu.html' %}
+
+{% endblock %}
+
+{% block footer %}
+{#    </div> <!-- Put footer outside #container -->#}
+    {% if not is_popup %}
+        <div id="footer" >
+        <footer class="footer" >
+            <div class="container-fluid">
+                {% block footer_content %}
+
+                    <div class="row">
+
+
+
+                        <div class="col-xs-12 col-sm-2 footer-links">
+                            {% block footer_links %}
+
+
+                            {% endblock %}
+                        </div>
+
+
+
+                        <div class="col-xs-12 col-sm-6 text-sm-center footer-copyright" style=" 
+                        font-weight: 500; line-height: 1.2; ">
+
+                            {% block copyright %}
+                              <br>
+                                UNIVERSIDAD COOPERATIVA DE COLOMBIA SEDE MONTERIA
+                                <br>
+                                © LENBOOK. Desarrollado por <a href="https://secbi.co/">Aleja y Rey</a> 2019.
+                            {% endblock %}
+                        </div>
+
+                        <div class="col-xs-12 col-sm-3 text-sm-right footer-version">
+
+                        </div>
+
+                    </div>
+                {% endblock %}
+            </div>
+        </footer>
+    {% endif %}
+
+{#    {{ block.super }}#}
+    <script src="{% static "suit/js/suit.js" %}"></script>
+    {% if cl.formset or action_form and 'toggle_changelist_top_actions'|suit_conf:request %}
+        <script type="text/javascript">
+            Suit.ListActionsToggle.init();
+        </script>
+    {% elif adminform %}
+        <script type="text/javascript">
+            Suit.$("#{{ opts.model_name }}_form").suitFormDebounce();
+            {% if 'form_submit_on_right'|suit_conf:request %}
+                Suit.FixedBar.init();
+            {% endif %}
+            {% if adminform.model_admin.suit_form_tabs %}
+                Suit.$(function () {
+                    Suit.$('#suit_form_tabs').suitFormTabs();
+                });
+            {% endif %}
+{#            {% if 'layout'|suit_conf:request.current_app == 'vertical' %}#}
+{#                Suit.$('#content').prepend(Suit.$('.breadcrumbs'));#}
+{#            {% endif %}#}
+        </script>
+    {% endif %}
+
+{#    <div> <!-- Fix/close div previously closed by footer -->#}
+{% endblock %}
