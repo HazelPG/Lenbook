@@ -1,7 +1,7 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_static %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+{% block extrastyle %}{{ block.super }}
 
 <style media="screen">
 .content-block{
@@ -56,7 +56,6 @@
 font-weight: 500; line-height: 1.2;">
   <div style="text-align:center" class="panel-body">
     <br>
-    <br>
       <h3 style="color:rgb(13, 13, 14); font-size:20px;">Bienvenido la plataforma de gestion de prestamos de libros de la Universidad Cooperativa de Colombia</h3>
     <br>
     <div class="main">
@@ -93,11 +92,10 @@ font-weight: 500; line-height: 1.2;">
 <div  class="col-md-12 config-col">
 <ul class="nav nav-tabs" id="configTab"><br>
 </ul>
-<div style="box-shadow: 0 1px 0px 0px rgba(128, 132, 133, 0.2)" class="panel panel-default">
+<div  class="panel panel-default">
   <div style="text-align:center" class="panel-body">
     <br>
-    <h3 style="color:rgb(24, 82, 206);  
-    font-weight: 500; line-height: 1.2; font-size:20px;">Bienvenido la plataforma de gestion de prestamos de libros de la Universidad Cooperativa de Colombia</h3>
+    <h3 >Bienvenido la plataforma de gestion de prestamos de libros de la Universidad Cooperativa de Colombia</h3>
     <br>
     <div class=" main">
         <a href="/admin/Prestamo/Prestar/" class="main-item">
