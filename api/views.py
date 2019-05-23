@@ -165,7 +165,7 @@ class LibroList(generics.ListCreateAPIView):
 @action(methods=['post'], detail=True)
 class LibroActiveList(generics.ListCreateAPIView):
     permission_classes = (AllowAny,)
-    queryset = Libro.objects.raw('SELECT r.id FROM libros_libro r WHERE NOT EXISTS(SELECT r.id FROM prestamos_detalleprestamo d WHERE r.id = d."Libro_detalle_id"  AND r."Estado_libro" = %s AND d."Estado" = %s) ORDER BY r.id' %("'ACTIVO'", "'PRESTADO'") )
+    queryset = Libro.objects.raw('SELECT r.id FROM libros_libro r WHERE NOT EXISTS(SELECT r.id FROM prestamos_detalleprestamo d WHERE r.id = d."Libro_detalle_id" AND d."Estado" = %s) AND r."Estado_libro" = %s  ORDER BY r.id' %("'PRESTADO'", "'ACTIVO'") )
     serializer_class = LibroSerializer
 
 class LibroDetail(generics.RetrieveUpdateDestroyAPIView):

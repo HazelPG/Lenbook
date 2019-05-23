@@ -1,0 +1,129 @@
+bisinu/peoples/migrations/__pycache__/__init__\.cpython-36\.pyc
+
+
+# Byte-compiled / optimized / DLL files
+
+__pycache__/
+__pycache__
+
+*.py[cod]
+*.pyc
+
+#database file
+
+*.sqlite3
+
+# C extensions
+
+*.so
+
+# Distribution / packaging
+
+.Python
+
+env/
+
+bin/
+
+build/
+
+develop-eggs/
+
+dist/
+
+eggs/
+
+lib/
+
+lib64/
+
+parts/
+
+sdist/
+
+var/
+
+*.egg-info/
+
+.installed.cfg
+
+*.egg
+
+
+
+# Installer logs
+
+pip-log.txt
+
+pip-delete-this-directory.txt
+
+
+
+# Unit test / coverage reports
+
+htmlcov/
+
+.tox/
+
+.coverage
+
+.cache
+
+nosetests.xml
+
+coverage.xml
+
+
+
+# Mr Developer
+
+.mr.developer.cfg
+
+.project
+
+.pydevproject
+
+
+
+# Rope
+
+.ropeproject
+
+
+
+# Django stuff:
+
+*.log
+
+*.pot
+
+
+
+# Sphinx documentation
+
+docs/_build/
+
+
+
+# Pycharm
+
+
+# Vim
+
+*~
+
+*.swp
+
+*.swo
+
+/.idea
+/api/migrations
+/configuracion/migrations
+/core/migrations
+/lenbook/migrations
+/libros/migrations
+/personas/migrations
+/presstamos/migrations
+
+
+/files
