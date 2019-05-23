@@ -47,3 +47,15 @@ body.suit_layout_vertical #suit-nav > ul > li:not(.active):hover > ul > li > a:h
 .fa {
   color: #ffffff;
 }
+.fa.fa-arrow-left{
+  color: #4698C4 !important;
+}
+.fa.fa-file{
+  color: #4698C4 !important;
+}
+.fa.fa-barcode{
+  color: #4698C4 !important;
+}
+.fa.fa-search-plus{
+  color: #4698C4 !important;
+}

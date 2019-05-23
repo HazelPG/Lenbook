@@ -22,8 +22,9 @@ class Autores(models.Model):
     Nombres_A = models.CharField(max_length=80)
     Apellidos_A = models.CharField(max_length=80)
     Especialidad = models.CharField(max_length=30, null=True)
+    
     def __str__(self):
-        return str(self.Nombres_A)
+        return str(self.Nombres_A  +" "+ self.Apellidos_A )
 
 class Libro(models.Model):
     ESTADO = (

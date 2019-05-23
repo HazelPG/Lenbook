@@ -18,12 +18,18 @@ class TipoPersona(models.Model):
 
 class Personas(models.Model):
 
+    TIPO_NID = (
+        ('TI', 'TI'),
+        ('CC', 'CC'),
+    )
+    
     ESTADO_TARJETA = (
         ('ACTIVA', 'ACTIVA'),
         ('INACTIVA', 'INACTIVA'),
     )
     Nro_Tarjeta = models.CharField(max_length=50, null=False, unique=True)
-    Nro_Documento = models.CharField(max_length=80,null=False)
+    Tipo_Documento = models.CharField(max_length=30, choices=TIPO_NID)
+    Nro_Documento = models.CharField(max_length=80,null=False,  unique=True)
     Nombres = models.CharField(max_length=80)
     Apellidos = models.CharField(max_length=80)
     Estado_Tarjeta = models.CharField(max_length=30, choices=ESTADO_TARJETA)
@@ -36,7 +42,7 @@ class Personas(models.Model):
     # Segundo_Nombre = models.CharField(max_length=30,blank=True, null=True)
     # Primer_Apellido = models.CharField(max_length=30, null=True)
     # Segundo_Apellido = models.CharField(max_length=30,blank=True, null=True)
-    # Tipo_Documento = models.CharField(max_length=30, choices=TIPO_NID)
+    
     # Sede = models.CharField(max_length=30, choices=SEDE, null=True)
     # genero = models.CharField(max_length=30, choices=GENERO_ESTUDIANTE, null=True)
     # Ciclo_Lectivo = models.CharField(max_length=30, null=True)

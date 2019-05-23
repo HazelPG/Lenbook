@@ -5,7 +5,6 @@
 {% block extrastyle %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
      <link  rel="stylesheet" href="{% static '/assets/css/header.css' %}"/>
-     <link rel="stylesheet" href="{% static '/assets/css/usuario.css' %}" media="screen" title="no title" charset="utf-8">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
      <link href="https://cdn.jsdelivr.net/npm/vuesax/dist/vuesax.css" rel="stylesheet">
      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
@@ -36,9 +35,6 @@
         height: 33px;
         margin-top: 30px;
         margin-bottom: 26px;
-      }
-      .fa {
-        color: #fff!important;
       }
       .botonadd{
         background-color: #035a7b;
@@ -79,16 +75,16 @@
             display: none;
       }
       .vs-card--header {
-        background-color: #225f51;
+        background-color: #295e7b;
         color: white;
         border-radius: 5px;
       }
       .vs-table--search-input, .vs-table--search i  {
-        color: chartreuse;
+        color: #295e7b;
       }
 
       .vs-table--header{
-        background-color: #225f51;
+        background-color: #295e7b;
        color: #fff;
        margin-top: 0px;
        height: 41px;
@@ -97,7 +93,9 @@
        padding-right: 15px;
        border-radius: 5px;
       }
-
+      .vs-list-header{
+        color: #295e7b;
+      }
       .img-loader{
           animation-duration: 2s;
           animation-name: slidein;
@@ -188,19 +186,19 @@
             </div>
             <div>
               <vs-list>
-                <vs-list-header title="Informacion Personal" color="success"></vs-list-header>
+                <vs-list-header title="Información Personal" ></vs-list-header>
                 <vs-list-item title="Nombre Completo">${persona.nombre}
                 </vs-list-item>
                 <vs-list-item title="Nro Tarjeta">${persona.tarjeta}
                 </vs-list-item>
                 <vs-list-item title="Nro Documento">${persona.documento}
                 </vs-list-item>
-                <vs-list-header title="Informacion Academica" color="primary"></vs-list-header>
+                <vs-list-header title="Información Academica"></vs-list-header>
                 <vs-list-item title="Programa o Dependencia">${persona.dependencia}
                 </vs-list-item>
                 <vs-list-item title="Cargo"> ${persona.cargo}
                 </vs-list-item>
-                <vs-list-header title="Informacion Prestamos" color="danger"></vs-list-header>
+                <vs-list-header title="Información Prestamos"></vs-list-header>
                 <vs-list-item title="Incidentes"> NO
                 </vs-list-item>
                 <vs-list-item title="Cantidad Incidentes"> 0
@@ -272,20 +270,20 @@
               obj.libros.push({
                 id:data[key].id,
                 nombre_libro:data[key].nombre_libro,
-                Autor:data[key].Autor,
+                Autor:data[key].Autor.Nombres_A + " " +data[key].Autor.Apellidos_A ,
                 Estado_libro:data[key].Estado_libro
               })
            }
         }).catch(function (error) {
           console.log(error)
-          obj.$vs.notify({title:'Error',text:'Ha ocurrido un erro cargando los recursos',color:'danger'})
+          obj.$vs.notify({title:'Error',text:'Ha ocurrido un erro cargando los libros',color:'danger'})
         })
       },
       change(){
         obj = this
         if(this.regextarjeta(this.value)){
           var tarjeta = Number(this.value)
-          axios.get('/api/Prestamo/?Estado=EN+CURSO&Persona__Nro_Tarjeta=' + tarjeta )
+          axios.get('/api/Prestamo/?Estado_prestamo=EN+CURSO&Persona__Nro_Tarjeta='+tarjeta )
           .then(function (response) {
               prestamos =response.data
               if(prestamos.length == 0){
@@ -367,7 +365,7 @@
                     // console.log(error)
           });
         }else{
-          this.$vs.notify({title:'Atencion',text:'No ha seleccionado ningun recurso para prestar',color:'warning'})
+          this.$vs.notify({title:'Atencion',text:'No ha seleccionado ningun libro para prestar',color:'warning'})
         }
 
       }

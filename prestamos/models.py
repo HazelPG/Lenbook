@@ -46,7 +46,7 @@ class DetallePrestamo(models.Model):
     Estado = models.CharField(max_length=20, choices=ESTADO,default="PRESTADO")
     Fecha_devolucion = models.DateField(null=True)
     Usuario_devolucion = models.ForeignKey(User, null=True, blank=True)
-    Recurso_detalle = models.ForeignKey(Libro, null=True)
+    Libro_detalle = models.ForeignKey(Libro, null=True)
 
     class Meta:
         verbose_name_plural = "Detalle Prestamos"
@@ -62,9 +62,9 @@ class Incidente(models.Model):
     )
 
     TIPO_INCIDENTE = (
-        ('INCIDENTE TOTAL DEL RECURSO', 'INCIDENTE TOTAL DEL RECURSO'),
-        ('INCIDENTE PARCIAL DEL RECURSO', 'INCIDENTE PARCIAL DEL RECURSO'),
-        ('PERDIDA DEL RECURSO', 'PERDIDA DEL RECURSO'),
+        ('INCIDENTE TOTAL DEL LIBRO', 'INCIDENTE TOTAL DEL LIBRO'),
+        ('INCIDENTE PARCIAL DEL LIBRO', 'INCIDENTE PARCIAL DEL LIBRO'),
+        ('PERDIDA DEL LIBRO', 'PERDIDA DEL LIBRO'),
         ('OTRO', 'OTRO'),
     )
 
@@ -76,7 +76,7 @@ class Incidente(models.Model):
     Persona = models.ForeignKey(Personas, null=True)
     Tipo_Incidente = models.CharField(max_length=50, choices=TIPO_INCIDENTE)
     Fecha_Incidente = models.DateField(default=now)
-    Recurso = models.ForeignKey(Libro, null=True)
+    Libro = models.ForeignKey(Libro, null=True)
     Prestamo_detalle = models.ForeignKey(DetallePrestamo, null=True)
     Estado= models.CharField(max_length=30, choices=ESTADO)
 

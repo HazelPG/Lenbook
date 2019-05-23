@@ -29,7 +29,7 @@ class Prestamos (admin.ModelAdmin):
 
     def Reporte_Prestamo(self, instance):
 
-        return "<a href='/admin/Prestamo/Reporte/%s'> <i style='font-size:20px; display: flex;justify-content: center;'  class='fa fa-file-pdf-o' aria-hidden='true'></i>  </a>" % instance.Id_prestamo
+        return "<a href='/admin/Prestamo/Reporte/%s'> <i style='font-size:20px; display: flex;justify-content: center;'  class='fa fa-file' aria-hidden='true'></i>  </a>" % instance.Id_prestamo
     Reporte_Prestamo.short_description = "Reporte Prestamo"
     Reporte_Prestamo.allow_tags = True
     Reporte_Prestamo.is_column = True
@@ -66,23 +66,18 @@ class Incidentes (admin.ModelAdmin):
     def Nombre_Completo(self, obj):
         return obj.Persona.Nombres + " " + obj.Persona.Apellidos
 
-    # def Recurso_id(self, obj):
-    #     return obj.Recurso.id
-
-    # def Nombre_Recurso(self, obj):
-    #     return obj.Recurso.Nombre_Recurso
 
 
     def Reporte_Incidente(self, instance):
 
-        return "<a href='/admin/Incidente/Reporte/%s'> <i style='font-size:20px; display: flex;justify-content: center;' class='fa fa-file-pdf-o' aria-hidden='true'></i>  </a>" % instance.Id_Incidente
+        return "<a href='/admin/Incidente/Reporte/%s'> <i style='font-size:20px; display: flex;justify-content: center;' class='fa fa-file' aria-hidden='true'></i>  </a>" % instance.Id_Incidente
     Reporte_Incidente.short_description = "Reporte Incidente"
     Reporte_Incidente.allow_tags = True
     Reporte_Incidente.is_column = True
 
     def Revision_Incidente(self, instance):
 
-        return "<a href='/admin/Incidente/Revision/%s'> <i style='font-size:20px; display: flex;justify-content: center;' class='fa fa-check-square-o' aria-hidden='true'></i>  </a>" % instance.Id_Incidente
+        return "<a href='/admin/Incidente/Revision/%s'> <i style='font-size:20px; display: flex;justify-content: center;' class='fa fa-search-plus' aria-hidden='true'></i>  </a>" % instance.Id_Incidente
     Revision_Incidente.short_description = "Revision Incidente"
     Revision_Incidente.allow_tags = True
     Revision_Incidente.is_column = True
@@ -96,7 +91,7 @@ class Incidentes (admin.ModelAdmin):
 class DetallePrestamos (admin.ModelAdmin):
     #def has_add_permission(self, request):
     #    return False
-        list_display = ['Id_detalle','Prestamo','Fecha_prestamo','Estado','Fecha_devolucion','Usuario_devolucion','Recurso_detalle']
+        list_display = ['Id_detalle','Prestamo','Fecha_prestamo','Estado','Fecha_devolucion','Usuario_devolucion','Libro_detalle']
         class Meta:
 		          model = DetallePrestamo
 

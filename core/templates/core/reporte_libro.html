@@ -16,6 +16,9 @@
     #suit-sub-nav {
         display: none !important;
     }
+    body.suit_layout_vertical #header {
+    background-color: #295e7b;
+    }
     #user-tools{
         display: none;
     }
@@ -33,17 +36,17 @@
 
 {% block content %}
         <div style="display: inline-block; margin-left: 15px">
-          <h3 style="font-size:25px;"> {{r.nombre_recurso}}</h3>
+          <h3 style="font-size:25px;"> {{r.nombre_libro}}</h3>
           <p>
            <b>ID: </b>{{r.id}} <br />
-            <b>TIPO: </b> {{r.tipo_de_recurso}} <br />
-            <b>MARCA: </b> {{r.Marca}} <br />
+            <b>TIPO: </b> {{r.tipo_de_libro}} <br />
+            <b>AUTOR: </b> {{r.Autor}} <br />
             <b>N° DE SERIE: </b> {% if r.Numero_Serie != none %} {{r.Numero_Serie}} {% else %} {% endif %}<br />
-            <b>ESTADO: </b> {{r.Estado_Recurso}} <br />
+            <b>ESTADO: </b> {{r.Estado_libro}} <br />
             <b>FECHA REGISTRO: </b>{{r.fecha_registro}} <br />
           </p>
         </div>
-      <h3 style="display: inline-block; float: right"><i class="fa fa-certificate" aria-hidden="true"></i> Reporte De Recurso - TI
+      <h3 style="display: inline-block; float: right"><i class="fa fa-certificate" aria-hidden="true"></i> Reporte De Libro -UCC
         <br>
         <small>MONTERIA-CORDOBA </small>
           <br>
@@ -54,8 +57,6 @@
 
     <div class="card">
   <div class="card-block">
-
-  </div>
 </div>
 <p>
 <strong><i class="fa fa-list-alt" aria-hidden="true"></i> Detalle & Consolidado De Prestamos:</strong>
@@ -77,7 +78,7 @@
 
   </tbody>
 </table>
-
+</div>
 
 <p>
   <strong><i class="fa fa-list-alt" aria-hidden="true"></i> Detalle & Consolidado Incidentes :</strong>
@@ -87,7 +88,7 @@
   <thead class="thead-inverse">
     <tr>
       <th>ID Incidente</th>
-      <th>Recurso</th>
+      <th>Libro</th>
       <th>Fecha Incidente</th>
       <th>Tipo Incidente</th>
       <th>Estado</th>
@@ -100,15 +101,15 @@
 
   <div>
     <a onclick="imprimir()" style="color: white;"  class="btn btn-success"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> IMPRIMIR </a>
-    <a href="/admin/recursos/recurso/" class="btn btn-success"><i class="" aria-hidden="true"></i> ATRAS </a>
+    <a href="/admin/libros/libro/" class="btn btn-success"><i class="" aria-hidden="true"></i> ATRAS </a>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
   $( document ).ready(function() {
-      var recurso = "{{r.id}}"
-    axios.get('/api/Prestamo/Detalle/?Recurso_detalle='+recurso)
+      var libro = "{{r.id}}"
+    axios.get('/api/Prestamo/Detalle/?Libro_detalle='+libro)
       .then(function (response) {
         var datos = response.data;
         var cantincidente = 0;
@@ -118,7 +119,7 @@
             .then(function (response) {
               var prestamo = response.data;
               for(i in prestamo.detailprestamo){
-                if(prestamo.detailprestamo[i].Recurso_detalle.id==recurso){
+                if(prestamo.detailprestamo[i].Libro_detalle.id==libro){
 
                   if(prestamo.detailprestamo[i].Incidentes.length !== 0 ){
                     incidente ="SI";
@@ -168,7 +169,7 @@
               // console.log(datos[key].Incidentes[j].Id_Incidente)
               var row2 = '<tr class="row1" >' +
               '<td class="field-Id_prestamo">' + datos[key].Incidentes[j].Id_Incidente+ "</td>"+
-              "<td>" + datos[key].Recurso_detalle.nombre_recurso + "</td>"+
+              "<td>" + datos[key].Libro_detalle.nombre_libro + "</td>"+
               "<td>" + datos[key].Incidentes[j].Fecha_Incidente + "</td>"+
               "<td>" + datos[key].Incidentes[j].Tipo_Incidente + "</td>"+
               "<td>" + datos[key].Incidentes[j].Estado + "</td>"+

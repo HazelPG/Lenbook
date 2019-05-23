@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^$',  views.inicio, name='inicio'),
     url(r'^admin/', admin.site.urls),
     url(r'^admin/Prestamo/Prestar/',  views.prestamo_prestar, name='prestamo-prestar'),
-    url(r'^admin/recursos/codigo_barras/(?P<Id_recurso>[\w\-]+)$', views.codigo_barras, name='codigo-barras'),
+    url(r'^admin/libros/codigo_barras/(?P<Id_libro>[\w\-]+)$', views.codigo_barras, name='codigo-barras'),
     url(r'^admin/Prestamo/Detalle/(?P<Id_prestamo>[\w\-]+)$', views.detalle_prestamo, name='detalle-prestamo'),
     url(r'^admin/persona/Reporte/(?P<Nro_Tarjeta>[\w\-]+)$',  views.persona_reporte, name='Persona-Reporte'),
     url(r'^admin/Libro/Reporte/(?P<Id_libro>[\w\-]+)$',  views.libro_reporte, name='Libro-Reporte'),

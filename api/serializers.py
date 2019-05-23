@@ -31,9 +31,11 @@ class AutorSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class LibroSerializer(serializers.ModelSerializer):
+    Autor = AutorSerializer(read_only=True)
+    AutorId = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Autores.objects.all(), source='Autor')
     class Meta:
         model = Libro
-        fields = "__all__"
+        fields = ('id', 'tipo_de_libro','Autor','AutorId', 'nombre_libro', 'Numero_Serie', 'Estado_libro','fecha_registro')
         #fields = ('Id_recurso','tipo_de_recurso','Marca','nombre_recurso','referencia','Estado_Recurso','fecha_registro','Detalle_Prestamo')
 
 class DetalleIncidenteSerializer(serializers.ModelSerializer):
@@ -66,7 +68,7 @@ class DetallePrestamoSerializer(serializers.ModelSerializer):
     Incidentes = IncidenteSerializer(many=True, read_only=True,source='incidente_set')
     class Meta:
         model = DetallePrestamo
-        fields = ('Id_detalle','Fecha_prestamo', 'Estado','Fecha_devolucion','Prestamo','Usuario_devolucion','DevolucionuserId','Libro_detalle','libroid','Incidentes')
+        fields = ('Id_detalle','Fecha_prestamo', 'Estado','Fecha_devolucion','Prestamo','Usuario_devolucion','DevolucionuserId','libroid','Libro_detalle','Incidentes')
 
 class ProgramaSerializer(serializers.ModelSerializer):
     class Meta:

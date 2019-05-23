@@ -30,7 +30,7 @@ class libros (ImportExportModelAdmin):
     codigo_barras.is_column = True
 
     def Reporte_libro(self, instance):
-        return "<a href='/admin/libro/Reporte/%s'> <i style='font-size:17px' class='fa fa-file-pdf-o' aria-hidden='true'></i>   </a>" % instance.id
+        return "<a href='/admin/Libro/Reporte/%s'> <i style='font-size:17px' class='fa fa-file' aria-hidden='true'></i>   </a>" % instance.id
 
     Reporte_libro.short_description = "Reporte libro"
     Reporte_libro.allow_tags = True

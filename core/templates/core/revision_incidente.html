@@ -18,6 +18,9 @@
     #suit-sub-nav {
         display: none !important;
     }
+    body.suit_layout_vertical #header {
+    background-color: #295e7b;
+    }
     #user-tools{
         display: none;
     }
@@ -48,7 +51,7 @@
 <span class="input-group-addon" id="sizing-addon2">TIPO INCIDENTE: </span>
 <label  class="form-control"  aria-describedby="sizing-addon2" id="usuariop">{{r.Tipo_Incidente}}</label>
 <span class="input-group-addon" id="estadoin">ESTADO INCIDENTE: </span>
-<label  class="form-control"  aria-describedby="sizing-addon2" id="estadop"></label>
+<label  class="form-control"  aria-describedby="sizing-addon2" id="estadop">{{r.Estado}}</label>
 </div>
 <br>
 <strong><i class="fa fa-list-alt" aria-hidden="true"></i> Datos De La Persona</strong>
@@ -68,25 +71,25 @@
   <label  class="form-control"  aria-describedby="sizing-addon2" id="cargopersonap">{{r.Persona.Tipo_Persona.Tipo_persona}}</label>
 </div>
   <br>
-  <strong><i class="fa fa-list-alt" aria-hidden="true"></i> Datos Del Recurso</strong>
+  <strong><i class="fa fa-list-alt" aria-hidden="true"></i> Datos Del Libro</strong>
   <div class="input-group">
-    <span class="input-group-addon" id="sizing-addon2">TIPO RECURSO: </span>
-    <label class="form-control"  aria-describedby="sizing-addon2" id="nombpersonap">{{r.Recurso.tipo_de_recurso.tipo_recurso}}  </label>
-    <span class="input-group-addon" id="sizing-addon2">ID RECURSO: </span>
-    <label  class="form-control"  aria-describedby="sizing-addon2" id="tarpersonap">{{r.Recurso.id}} </label>
-    <span class="input-group-addon" id="sizing-addon2">MARCA: </span>
-    <label  class="form-control"  aria-describedby="sizing-addon2" id="nrodocumentop">{{r.Recurso.Marca.Marca}}</label>
-    <span class="input-group-addon" id="sizing-addon2">NOMBRE RECURSO: </span>
-    <label class="form-control"  aria-describedby="sizing-addon2" id="nombpersonap">{{r.Recurso.nombre_recurso}}  </label>
+    <span class="input-group-addon" id="sizing-addon2">TIPO LIBRO: </span>
+    <label class="form-control"  aria-describedby="sizing-addon2" id="nombpersonap">{{r.Libro.tipo_de_libro}}  </label>
+    <span class="input-group-addon" id="sizing-addon2">ID LIBRO: </span>
+    <label  class="form-control"  aria-describedby="sizing-addon2" id="tarpersonap">{{r.Libro.id}} </label>
+    <span class="input-group-addon" id="sizing-addon2">NUMERO DE SERIE: </span>
+    <label  class="form-control"  aria-describedby="sizing-addon2" id="nrodocumentop">{{r.Libro.Numero_Serie}}</label>
+    <span class="input-group-addon" id="sizing-addon2">NOMBRE LIBRO: </span>
+    <label class="form-control"  aria-describedby="sizing-addon2" id="nombpersonap">{{r.Libro.nombre_libro}}  </label>
   </div>
   <br>
   <div class="input-group">
-    <span class="input-group-addon" id="sizing-addon2">REFERENCIA: </span>
-    <label  class="form-control"  aria-describedby="sizing-addon2" id="tarpersonap">{{r.Recurso.referencia}} </label>
+    <span class="input-group-addon" id="sizing-addon2">AUTOR: </span>
+    <label  class="form-control"  aria-describedby="sizing-addon2" id="tarpersonap">{{r.Libro.Autor}} </label>
     <span class="input-group-addon" id="sizing-addon2">FECHA DE REGISTRO: </span>
-    <label  class="form-control"  aria-describedby="sizing-addon2" id="nrodocumentop">{{r.Recurso.fecha_registro}}</label>
-    <span class="input-group-addon" id="sizing-addon2">ESTADO RECURSO: </span>
-    <label  class="form-control"  aria-describedby="sizing-addon2" id="nrodocumentop">{{r.Recurso.Estado_Recurso}}</label>
+    <label  class="form-control"  aria-describedby="sizing-addon2" id="nrodocumentop">{{r.Libro.fecha_registro}}</label>
+    <span class="input-group-addon" id="sizing-addon2">ESTADO LIBRO: </span>
+    <label  class="form-control"  aria-describedby="sizing-addon2" id="nrodocumentop">{{r.Libro.Estado_libro}}</label>
   </div>
   <br>
   <div class="card">
@@ -125,7 +128,7 @@
         </button>
       </div>
       <div class="modal-body">
-            <label for="exampleFormControlFile1">ESTADO FINAL DEL RECURSO</label>
+            <label for="exampleFormControlFile1">ESTADO FINAL DEL LIBRO</label>
             <select class="form-control" name="estado" id="selected">
               <option value="0">ACTIVO</option>
               <option value="1">DADO DE BAJA POR PERDIDA</option>
@@ -186,14 +189,14 @@
 
     var incidente = "{{r}}";
     var estadoInci = "{{r.Estado}}"
-    var recurso = "{{r.Recurso.id}}"
+    var recurso = "{{r.Libro.id}}"
     var token = "{{ csrf_token }}"
     var usuario = "{{user.id}}"
     var date = new Date();
     var fecha  = date.getFullYear() +"-"+ (date.getMonth()+1) + "-" + date.getDate();
     var hora = date.getHours() + ":" + date.getMinutes() + ":"+ date.getSeconds();
 
-    axios.get('/api/Recurso/Incidente/'+ incidente)
+    axios.get('/api/Libro/Incidente/'+ incidente)
       .then(function (response) {
         var datos = response.data
         $('#estadop').text(datos.Estado);
@@ -234,9 +237,9 @@
       var Estado =  $('select[name="estado"] option:selected').text()
       var descripcion =  $("#textarea").val();
       var data = {
-        "Estado_Recurso": Estado
+        "Estado_libro": Estado
       }
-      axios.patch("/api/recurso/" + recurso + "/", data, {
+      axios.patch("/api/libro/" + recurso + "/", data, {
           headers: {"X-CSRFToken": token,
           'Content-Type': 'application/json' }
       }).then(function (response) {
@@ -277,7 +280,7 @@
       var data2 = {
          "Estado": "REVISADO",
       }
-      axios.patch("/api/Recurso/Incidente/" + incidente + "/", data2, {
+      axios.patch("/api/Libro/Incidente/" + incidente + "/", data2, {
           headers: {"X-CSRFToken": token,
           'Content-Type': 'application/json' }
       }).then(function (response) {
