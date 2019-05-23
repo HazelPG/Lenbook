@@ -109,8 +109,8 @@ function parameterReport(){
   });
 
 
-  //instancia el select de tipos de recurso
-  axios.get('/api/Recurso/Tipo/')
+  instancia el select de tipos de recurso
+  axios.get('/api/Libo/Tipo/')
     .then(function (response) {
     var datos = response.data;
     for(key in datos){
@@ -121,17 +121,17 @@ function parameterReport(){
       //console.log(error);
   });
 
-  //instancia el select de tipos de recurso
-  axios.get('/api/Recurso/Marca/')
-    .then(function (response) {
-    var datos = response.data;
-    for(key in datos){
-      let option = "<option value="+ datos[key].id+">"+ datos[key].Marca+"</option>";
-      $("#select5").append(option);
-    }
-  }).catch(function (error) {
-      //console.log(error);
-  });
+  // //instancia el select de tipos de recurso
+  // axios.get('/api/Recurso/Marca/')
+  //   .then(function (response) {
+  //   var datos = response.data;
+  //   for(key in datos){
+  //     let option = "<option value="+ datos[key].id+">"+ datos[key].Marca+"</option>";
+  //     $("#select5").append(option);
+  //   }
+  // }).catch(function (error) {
+  //     //console.log(error);
+  // });
 }
 
 //invertir fecha
@@ -246,7 +246,7 @@ function instanciarReporte(query){
             "<td>" + query[key].detailprestamo[j].Incidentes[0].Id_Incidente  + "</td>"+
             "<td>" + query[key].detailprestamo[j].Incidentes[0].Fecha_Incidente + "</td>"+
             "<td>" + query[key].detailprestamo[j].Incidentes[0].Estado + "</td>"+
-            "<td>" + query[key].detailprestamo[j].Recurso_detalle.nombre_recurso + "</td>"+
+            "<td>" + query[key].detailprestamo[j].Recurso_detalle.nombre_libro + "</td>"+
             "<td>" + query[key].detailprestamo[j].Incidentes[0].Tipo_Incidente + "</td>"+
             "</tr>";
           $("#detallep").append(row);
@@ -316,14 +316,14 @@ function instanciarReporte(query){
           if($("#selectOne").val()=="SOLO INCIDENTES"){
             var incidente = ""
             for(j in query[key].detailprestamo){
-              if($("#select5").val() == query[key].detailprestamo[j].Recurso_detalle.Marca){
+              if($("#select5").val() == query[key].detailprestamo[j].Libro_detalle.Marca){
                 if(query[key].detailprestamo[j].Incidentes !=0){
                   incidente = "SI"
                   var row = "<tr class='row1' >" +
                     '<td class="field-Id_prestamo">' + query[key].Id_prestamo+ "</td>"+
                     "<td>" + query[key].Fecha_prestamo + "</td>"+
                     "<td>" + query[key].detailprestamo[j].Recurso_detalle.Id_recurso + "</td>"+
-                    "<td>" + query[key].detailprestamo[j].Recurso_detalle.nombre_recurso + "</td>"+
+                    "<td>" + query[key].detailprestamo[j].Recurso_detalle.nombre_libro + "</td>"+
                     "<td>" + query[key].detailprestamo[j].Recurso_detalle.referencia + "</td>"+
                     "<td>" + query[key].detailprestamo[j].Recurso_detalle.Estado_Recurso + "</td>"+
                     "<td>" + incidente + "</td>"+
